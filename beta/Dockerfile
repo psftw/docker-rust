@@ -1,18 +1,18 @@
 FROM debian:jessie
 
-# rust beta 2016-02-04
+# rust beta 2016-02-12
 
 # pub   4096R/FA1BE5FE 2013-09-26
 #       Key fingerprint = 108F 6620 5EAE B0AA A8DD  5E1C 85AB 96E6 FA1B E5FE
 # uid                  Rust Language (Tag and Release Signing Key) <rust-key@rust-lang.org>
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 108F66205EAEB0AAA8DD5E1C85AB96E6FA1BE5FE
 
-ENV RUST_SIGNATURE_SHA256 72387f0859b07d9c552b105d2a405ad7d41d5c56c1aa203302df64b29104c5fa
+ENV RUST_SIGNATURE_SHA256 68627173e4216dfb7788433efb4116f8a2225bf997e3d850fb5bc71f9e8a532e
 
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && rm -rf /var/lib/apt/lists/* \
-	&& curl -fsSL "https://static.rust-lang.org/dist/2016-02-04/rust-beta-x86_64-unknown-linux-gnu.tar.gz" -o rust.tar.gz \
-	&& curl -fsSL "https://static.rust-lang.org/dist/2016-02-04/rust-beta-x86_64-unknown-linux-gnu.tar.gz.asc" -o rust.tar.gz.asc \
+	&& curl -fsSL "https://static.rust-lang.org/dist/2016-02-12/rust-beta-x86_64-unknown-linux-gnu.tar.gz" -o rust.tar.gz \
+	&& curl -fsSL "https://static.rust-lang.org/dist/2016-02-12/rust-beta-x86_64-unknown-linux-gnu.tar.gz.asc" -o rust.tar.gz.asc \
 	&& echo "$RUST_SIGNATURE_SHA256 rust.tar.gz.asc" | sha256sum -c - \
 	&& gpg --verify rust.tar.gz.asc \
 	&& mkdir rust \
