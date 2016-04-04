@@ -1,18 +1,18 @@
 FROM debian:jessie
 
-# rust nightly 2016-03-31
+# rust nightly 2016-04-03
 
 # pub   4096R/FA1BE5FE 2013-09-26
 #       Key fingerprint = 108F 6620 5EAE B0AA A8DD  5E1C 85AB 96E6 FA1B E5FE
 # uid                  Rust Language (Tag and Release Signing Key) <rust-key@rust-lang.org>
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 108F66205EAEB0AAA8DD5E1C85AB96E6FA1BE5FE
 
-ENV RUST_SIGNATURE_SHA256 3c7a62bd30ab3b78b0fe8a3ebbc6e1b764d00c0a21119383b333e10c04db4085
+ENV RUST_SIGNATURE_SHA256 dda2682584b298fcf0f770478be86b0c8a2a39007ecdba8a6957eb4d18591ab1
 
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && rm -rf /var/lib/apt/lists/* \
-	&& curl -fsSL "https://static.rust-lang.org/dist/2016-03-31/rust-nightly-x86_64-unknown-linux-gnu.tar.gz" -o rust.tar.gz \
-	&& curl -fsSL "https://static.rust-lang.org/dist/2016-03-31/rust-nightly-x86_64-unknown-linux-gnu.tar.gz.asc" -o rust.tar.gz.asc \
+	&& curl -fsSL "https://static.rust-lang.org/dist/2016-04-03/rust-nightly-x86_64-unknown-linux-gnu.tar.gz" -o rust.tar.gz \
+	&& curl -fsSL "https://static.rust-lang.org/dist/2016-04-03/rust-nightly-x86_64-unknown-linux-gnu.tar.gz.asc" -o rust.tar.gz.asc \
 	&& echo "$RUST_SIGNATURE_SHA256 rust.tar.gz.asc" | sha256sum -c - \
 	&& gpg --verify rust.tar.gz.asc \
 	&& mkdir rust \
