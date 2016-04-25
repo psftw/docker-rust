@@ -14,9 +14,9 @@ RUN set -x \
 	&& curl -fsSL "https://static.rust-lang.org/dist/{mod_date}/rust-{rust_version}-x86_64-unknown-linux-gnu.tar.gz" -o rust.tar.gz \
 	&& curl -fsSL "https://static.rust-lang.org/dist/{mod_date}/rust-{rust_version}-x86_64-unknown-linux-gnu.tar.gz.asc" -o rust.tar.gz.asc \
 	&& echo "$RUST_SIGNATURE_SHA256 rust.tar.gz.asc" | sha256sum -c - \
-	&& gpg --verify rust.tar.gz.asc \
+	&& gpg --batch --verify rust.tar.gz.asc rust.tar.gz \
 	&& mkdir rust \
 	&& tar -xf rust.tar.gz -C rust --strip-components 1 \
 	&& ( cd rust && ./install.sh ) \
 	&& rm -r rust.tar.gz* rust \
- 	&& apt-get purge -y --auto-remove curl
+	&& apt-get purge -y --auto-remove curl
