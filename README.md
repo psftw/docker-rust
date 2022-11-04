@@ -4,7 +4,7 @@
 
 That's right, there is now  a `rust` Official Image!
 
-The code for it lives over in https://github.com/rust-lang-nursery/docker-rust/
+The code for it lives over in https://github.com/rust-lang/docker-rust
 
 It even has multiple architectures too! :heart_eyes:
 
